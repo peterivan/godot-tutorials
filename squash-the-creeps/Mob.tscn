@@ -1,0 +1,26 @@
+[gd_scene load_steps=4 format=2]
+
+[ext_resource path="res://art/mob.glb" type="PackedScene" id=1]
+[ext_resource path="res://Mob.gd" type="Script" id=2]
+
+[sub_resource type="BoxShape" id=1]
+extents = Vector3( 0.918745, 0.464532, 1.24985 )
+
+[node name="Mob" type="KinematicBody"]
+collision_layer = 2
+collision_mask = 0
+script = ExtResource( 2 )
+
+[node name="Pivot" type="Spatial" parent="."]
+
+[node name="mob" parent="Pivot" groups=["mob"] instance=ExtResource( 1 )]
+
+[node name="CollisionShape" type="CollisionShape" parent="."]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.292039, 0.334089 )
+shape = SubResource( 1 )
+
+[node name="VisibilityNotifier" type="VisibilityNotifier" parent="."]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.322157, 0 )
+aabb = AABB( -1.2051, -0.624622, -1.96575, 2.41021, 1.25999, 3.9315 )
+
+[connection signal="screen_exited" from="VisibilityNotifier" to="." method="_on_VisibilityNotifier_screen_exited"]
